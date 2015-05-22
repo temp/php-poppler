@@ -21,7 +21,7 @@ use Psr\Log\LoggerInterface;
 /**
  * pdftotext binary driver
  *
- * @author Stephan Wentz <sw@brainbits.net>
+ * @author Stephan Wentz <stephan@wentz.it>
  */
 class Pdftotext extends AbstractBinary
 {

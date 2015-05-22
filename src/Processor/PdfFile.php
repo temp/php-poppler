@@ -19,7 +19,7 @@ use Poppler\Exception\FileNotFoundException;
 /**
  * PDF file
  *
- * @author Stephan Wentz <sw@brainbits.net>
+ * @author Stephan Wentz <stephan@wentz.it>
  */
 class PdfFile
 {

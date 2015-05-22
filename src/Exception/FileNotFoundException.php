@@ -14,7 +14,7 @@ namespace Poppler\Exception;
 /**
  * Poppler file not found exception
  *
- * @author Stephan Wentz <sw@brainbits.net>
+ * @author Stephan Wentz <stephan@wentz.it>
  */
 class FileNotFoundException extends InvalidArgumentException
 {

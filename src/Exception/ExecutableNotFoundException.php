@@ -14,7 +14,7 @@ namespace Poppler\Exception;
 /**
  * Poppler executable not found exception
  *
- * @author Stephan Wentz <sw@brainbits.net>
+ * @author Stephan Wentz <stephan@wentz.it>
  */
 class ExecutableNotFoundException extends \RuntimeException implements ExceptionInterface
 {

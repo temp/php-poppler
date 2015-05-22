@@ -14,7 +14,7 @@ namespace Poppler\Exception;
 /**
  * Poppler runtime exception
  *
- * @author Stephan Wentz <sw@brainbits.net>
+ * @author Stephan Wentz <stephan@wentz.it>
  */
 class RuntimeException extends \RuntimeException implements ExceptionInterface
 {

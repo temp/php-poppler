@@ -21,7 +21,7 @@ use Psr\Log\LoggerInterface;
 /**
  * pdftohtml binary driver
  *
- * @author Stephan Wentz <sw@brainbits.net>
+ * @author Stephan Wentz <stephan@wentz.it>
  */
 class Pdftohtml extends AbstractBinary
 {

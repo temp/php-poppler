@@ -14,7 +14,7 @@ namespace Poppler\Driver;
 /**
  * pdftohtml options
  *
- * @author Stephan Wentz <sw@brainbits.net>
+ * @author Stephan Wentz <stephan@wentz.it>
  */
 class PdftohtmlOptions
 {

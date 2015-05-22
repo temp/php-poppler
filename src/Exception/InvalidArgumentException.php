@@ -14,7 +14,7 @@ namespace Poppler\Exception;
 /**
  * Poppler invalid argument exception
  *
- * @author Stephan Wentz <sw@brainbits.net>
+ * @author Stephan Wentz <stephan@wentz.it>
  */
 class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {

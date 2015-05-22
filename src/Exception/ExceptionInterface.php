@@ -14,7 +14,7 @@ namespace Poppler\Exception;
 /**
  * Poppler exception interface
  *
- * @author Stephan Wentz <sw@brainbits.net>
+ * @author Stephan Wentz <stephan@wentz.it>
  */
 interface ExceptionInterface
 {
