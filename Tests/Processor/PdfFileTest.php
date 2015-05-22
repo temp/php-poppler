@@ -19,7 +19,7 @@ class PdfFileTest extends TestCase
     public function testGetInfo()
     {
         $pdfFile = new PdfFile($this->createPdfinfoMock(), $this->createPdftotextMock(), $this->createPdftohtmlMock());
-        $info = $pdfFile->getInfo(__DIR__ . '/../files/pdf-sample.pdf');
+        $info = $pdfFile->getInfo(__DIR__ . '/../fixture/file.pdf');
     }
 
     /**
@@ -34,7 +34,7 @@ class PdfFileTest extends TestCase
     public function testToText()
     {
         $pdfFile = new PdfFile($this->createPdfinfoMock(), $this->createPdftotextMock(), $this->createPdftohtmlMock());
-        $text = $pdfFile->toText(__DIR__ . '/../files/pdf-sample.pdf');
+        $text = $pdfFile->toText(__DIR__ . '/../fixture/file.pdf');
     }
 
     /**
@@ -49,6 +49,6 @@ class PdfFileTest extends TestCase
     public function testToHtml()
     {
         $pdfFile = new PdfFile($this->createPdfinfoMock(), $this->createPdftotextMock(), $this->createPdftohtmlMock());
-        $pdfFile->toHtml(__DIR__ . '/../files/pdf-sample.pdf', sys_get_temp_dir());
+        $pdfFile->toHtml(__DIR__ . '/../fixture/file.pdf', sys_get_temp_dir());
     }
 }

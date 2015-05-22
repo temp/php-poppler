@@ -13,7 +13,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "Poppler\\": ""
+            "Poppler\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Poppler\\Tests\\": "tests/"
         }
     },
     "require": {
@@ -21,7 +26,6 @@
         "alchemy/binary-driver": "~1.5"
     },
     "require-dev": {
-        "sami/sami"       : "~1.0",
         "phpunit/phpunit" : "~3.7"
     }
 }

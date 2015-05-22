@@ -16,7 +16,7 @@ class PdfFileFunctionalTest extends TestCase
             $this->createPdftotextMock(),
             $this->createPdftohtmlMock()
         );
-        $info = $pdfFile->getInfo(__DIR__ . '/../files/pdf-sample.pdf');
+        $info = $pdfFile->getInfo(__DIR__ . '/../fixture/file.pdf');
 
         $this->assertNotEmpty($info);
         $this->assertInternalType('array', $info);
@@ -33,7 +33,7 @@ class PdfFileFunctionalTest extends TestCase
             Pdftotext::create($this->createLoggerMock()),
             $this->createPdftohtmlMock()
         );
-        $text = $pdfFile->toText(__DIR__ . '/../files/pdf-sample.pdf');
+        $text = $pdfFile->toText(__DIR__ . '/../fixture/file.pdf');
 
         $this->assertNotEmpty($text);
         $this->assertEquals($this->createTextContent(), $text);
