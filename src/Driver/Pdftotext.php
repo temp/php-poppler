@@ -1,5 +1,7 @@
 <?php
 
+declare (strict_types = 1);
+
 /*
  * This file is part of php-poppler.
  *
@@ -19,29 +21,21 @@ use Poppler\Exception\ExecutableNotFoundException;
 use Psr\Log\LoggerInterface;
 
 /**
- * pdftotext binary driver
- *
- * @author Stephan Wentz <stephan@wentz.it>
+ * pdftotext binary driver.
  */
 class Pdftotext extends AbstractBinary
 {
     /**
-     * @var boolean
+     * @var bool
      */
     private $isAvailable;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'pdftotext';
     }
 
-    /**
-     * @return PdftotextOptions
-     */
-    public function options()
+    public function options(): PdftotextOptions
     {
         return new PdftotextOptions();
     }
@@ -49,12 +43,12 @@ class Pdftotext extends AbstractBinary
     /**
      * Creates an Pdftotext driver.
      *
-     * @param LoggerInterface     $logger
-     * @param array|Configuration $configuration
+     * @param LoggerInterface       $logger
+     * @param mixed[]|Configuration $configuration
      *
      * @return Pdftotext
      */
-    public static function create(LoggerInterface $logger = null, $configuration = array())
+    public static function create(LoggerInterface $logger = null, $configuration = array()): Pdftotext
     {
         if (!$configuration instanceof ConfigurationInterface) {
             $configuration = new Configuration($configuration);
@@ -74,13 +68,9 @@ class Pdftotext extends AbstractBinary
     }
 
     /**
-     * Check availability
-     *
-     * @param string $filename
-     *
-     * @return boolean
+     * Check availability.
      */
-    public function isAvailable($filename = null)
+    public function isAvailable(): bool
     {
         if (null === $this->isAvailable) {
             $output = $this->command('-v');
@@ -107,10 +97,8 @@ class Pdftotext extends AbstractBinary
     /**
      * Calls -listenc
      * list available encodings
-     *
-     * @return string
      */
-    public function listEncodings()
+    public function listEncodings(): string
     {
         return $this->command('-listenc');
     }

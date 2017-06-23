@@ -1,5 +1,7 @@
 <?php
 
+declare (strict_types = 1);
+
 /*
  * This file is part of php-poppler.
  *
@@ -12,9 +14,7 @@
 namespace Poppler\Exception;
 
 /**
- * Poppler runtime exception
- *
- * @author Stephan Wentz <stephan@wentz.it>
+ * Poppler runtime exception.
  */
 class RuntimeException extends \RuntimeException implements ExceptionInterface
 {

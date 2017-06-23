@@ -1,8 +1,10 @@
 <?php
+
 namespace Poppler\Tests\Driver;
 
 use Alchemy\BinaryDriver\Configuration;
 use Poppler\Driver\Pdfinfo;
+use Poppler\Exception\ExecutableNotFoundException;
 use Poppler\Tests\TestCase;
 use Symfony\Component\Process\ExecutableFinder;
 
@@ -25,24 +27,27 @@ class PdfinfoTest extends TestCase
 
     public function testCreate()
     {
-        $logger = $this->createLoggerMock();
-        $pdfinfo = Pdfinfo::create($logger, array());
-        $this->assertInstanceOf('Poppler\Driver\Pdfinfo', $pdfinfo);
-        $this->assertEquals($logger, $pdfinfo->getProcessRunner()->getLogger());
+        $logger = $this->createLogger();
+
+        $pdfinfo = Pdfinfo::create($logger->reveal(), array());
+
+        $this->assertInstanceOf(Pdfinfo::class, $pdfinfo);
+        $this->assertEquals($logger->reveal(), $pdfinfo->getProcessRunner()->getLogger());
     }
 
     public function testCreateWithConfig()
     {
         $conf = new Configuration();
-        $pdfinfo = Pdfinfo::create($this->createLoggerMock(), $conf);
+
+        $pdfinfo = Pdfinfo::create($this->createLogger()->reveal(), $conf);
+
         $this->assertEquals($conf, $pdfinfo->getConfiguration());
     }
 
-    /**
-     * @expectedException \Poppler\Exception\ExecutableNotFoundException
-     */
     public function testCreateFailureThrowsAnException()
     {
-        Pdfinfo::create($this->createLoggerMock(), array('pdfinfo.binaries' => '/path/to/nowhere'));
+        $this->expectException(ExecutableNotFoundException::class);
+
+        Pdfinfo::create($this->createLogger()->reveal(), array('pdfinfo.binaries' => '/path/to/nowhere'));
     }
 }

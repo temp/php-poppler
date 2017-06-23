@@ -12,28 +12,28 @@ class PdfFileFunctionalTest extends TestCase
     public function testGetInfo()
     {
         $pdfFile = new PdfFile(
-            Pdfinfo::create($this->createLoggerMock()),
-            $this->createPdftotextMock(),
-            $this->createPdftohtmlMock()
+            Pdfinfo::create($this->createLogger()->reveal()),
+            $this->createPdftotext()->reveal(),
+            $this->createPdftohtml()->reveal()
         );
-        $info = $pdfFile->getInfo(__DIR__ . '/../fixture/file.pdf');
+        $info = $pdfFile->getInfo(self::TESTFILE);
 
         $this->assertNotEmpty($info);
         $this->assertInternalType('array', $info);
         $this->assertSame('This is a test PDF file', $info['Title']);
         $this->assertSame('1', $info['Pages']);
         $this->assertSame('1.3', $info['PDF version']);
-        $this->assertSame('Thu Jun 29 10:21:08 2000', $info['CreationDate']);
+        $this->assertSame('Thu Jun 29 01:21:08 2000 CEST', $info['CreationDate']);
     }
 
     public function testToText()
     {
         $pdfFile = new PdfFile(
-            $this->createPdfinfoMock(),
-            Pdftotext::create($this->createLoggerMock()),
-            $this->createPdftohtmlMock()
+            $this->createPdfinfo()->reveal(),
+            Pdftotext::create($this->createLogger()->reveal()),
+            $this->createPdftohtml()->reveal()
         );
-        $text = $pdfFile->toText(__DIR__ . '/../fixture/file.pdf');
+        $text = $pdfFile->toText(self::TESTFILE);
 
         $this->assertNotEmpty($text);
         $this->assertEquals($this->createTextContent(), $text);

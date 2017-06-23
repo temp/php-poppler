@@ -1,5 +1,7 @@
 <?php
 
+declare (strict_types = 1);
+
 /*
  * This file is part of php-poppler.
  *
@@ -12,9 +14,7 @@
 namespace Poppler\Exception;
 
 /**
- * Poppler invalid argument exception
- *
- * @author Stephan Wentz <stephan@wentz.it>
+ * Poppler invalid argument exception.
  */
 class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {

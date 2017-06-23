@@ -2,53 +2,103 @@
 
 namespace Poppler\Tests\Processor;
 
+use Poppler\Exception\FileNotFoundException;
 use Poppler\Processor\PdfFile;
 use Poppler\Tests\TestCase;
+use Prophecy\Argument;
 
 class PdfFileTest extends TestCase
 {
-    /**
-     * @expectedException \Poppler\Exception\FileNotFoundException
-     */
-    public function testGetInfoFromInvalid()
+    private $tempDir;
+
+    public function setUp()
     {
-        $pdfFile = new PdfFile($this->createPdfinfoMock(), $this->createPdftotextMock(), $this->createPdftohtmlMock());
+        $this->tempDir = sys_get_temp_dir();
+    }
+
+    public function testConstructor()
+    {
+        $pdfInfo = $this->createPdfinfo();
+        $pdfToText = $this->createPdftotext();
+        $pdfToHtml = $this->createPdftohtml();
+
+        $pdfInfo->command([self::TESTFILE])
+            ->willReturn('testInfo: testInfo');
+
+        $pdfToText->command(["-nopgbrk", self::TESTFILE, '-'])
+            ->willReturn('testText');
+
+        $pdfToHtml->command([self::TESTFILE, $this->tempDir])
+            ->willReturn('testHtml');
+
+        $pdfFile = new PdfFile(
+            $pdfInfo->reveal(),
+            $pdfToText->reveal(),
+            $pdfToHtml->reveal()
+        );
+
+        $this->assertInstanceOf(PdfFile::class, $pdfFile);
+
+        return $pdfFile;
+    }
+
+    /**
+     * @depends testConstructor
+     */
+    public function testGetInfoFromInvalid(PdfFile $pdfFile)
+    {
+        $this->expectException(FileNotFoundException::class);
+
         $pdfFile->getInfo('/path/to/nowhere');
     }
 
-    public function testGetInfo()
+    /**
+     * @depends testConstructor
+     */
+    public function testGetInfo(PdfFile $pdfFile)
     {
-        $pdfFile = new PdfFile($this->createPdfinfoMock(), $this->createPdftotextMock(), $this->createPdftohtmlMock());
-        $info = $pdfFile->getInfo(__DIR__ . '/../fixture/file.pdf');
+        $info = $pdfFile->getInfo(self::TESTFILE);
+
+        $this->assertNotEmpty($info);
     }
 
     /**
-     * @expectedException \Poppler\Exception\FileNotFoundException
+     * @depends testConstructor
      */
-    public function testToTextFromInvalid()
+    public function testToTextFromInvalid(PdfFile $pdfFile)
     {
-        $pdfFile = new PdfFile($this->createPdfinfoMock(), $this->createPdftotextMock(), $this->createPdftohtmlMock());
+        $this->expectException(FileNotFoundException::class);
+
         $pdfFile->toText('/path/to/nowhere');
     }
 
-    public function testToText()
+    /**
+     * @depends testConstructor
+     */
+    public function testToText(PdfFile $pdfFile)
     {
-        $pdfFile = new PdfFile($this->createPdfinfoMock(), $this->createPdftotextMock(), $this->createPdftohtmlMock());
-        $text = $pdfFile->toText(__DIR__ . '/../fixture/file.pdf');
+        $text = $pdfFile->toText(self::TESTFILE);
+
+        $this->assertNotEmpty($text);
     }
 
     /**
-     * @expectedException \Poppler\Exception\FileNotFoundException
+     * @depends testConstructor
      */
-    public function testToHtmlFromInvalid()
+    public function testToHtmlFromInvalid(PdfFile $pdfFile)
     {
-        $pdfFile = new PdfFile($this->createPdfinfoMock(), $this->createPdftotextMock(), $this->createPdftohtmlMock());
-        $pdfFile->toHtml('/path/to/nowhere', sys_get_temp_dir());
+        $this->expectException(FileNotFoundException::class);
+
+        $pdfFile->toHtml('/path/to/nowhere', $this->tempDir);
     }
 
-    public function testToHtml()
+    /**
+     * @depends testConstructor
+     */
+    public function testToHtml(PdfFile $pdfFile)
     {
-        $pdfFile = new PdfFile($this->createPdfinfoMock(), $this->createPdftotextMock(), $this->createPdftohtmlMock());
-        $pdfFile->toHtml(__DIR__ . '/../fixture/file.pdf', sys_get_temp_dir());
+        $html = $pdfFile->toHtml(self::TESTFILE, $this->tempDir);
+
+        $this->assertNotEmpty($html);
     }
 }

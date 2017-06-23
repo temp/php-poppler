@@ -1,5 +1,7 @@
 <?php
 
+declare (strict_types = 1);
+
 /*
  * This file is part of php-poppler.
  *
@@ -17,32 +19,16 @@ use Poppler\Driver\Pdftotext;
 use Poppler\Exception\FileNotFoundException;
 
 /**
- * PDF file
- *
- * @author Stephan Wentz <stephan@wentz.it>
+ * PDF file.
  */
 class PdfFile
 {
-    /**
-     * @var Pdfinfo
-     */
     private $pdfinfo;
 
-    /**
-     * @var Pdftotext
-     */
     private $pdftotext;
 
-    /**
-     * @var Pdftohtml
-     */
     private $pdftohtml;
 
-    /**
-     * @param Pdfinfo   $pdfinfo
-     * @param Pdftotext $pdftotext
-     * @param Pdftohtml $pdftohtml
-     */
     public function __construct(Pdfinfo $pdfinfo, Pdftotext $pdftotext, Pdftohtml $pdftohtml)
     {
         $this->pdfinfo = $pdfinfo;
@@ -50,20 +36,13 @@ class PdfFile
         $this->pdftohtml = $pdftohtml;
     }
 
-    /**
-     * @param string $inputfile
-     * @param string $toEncoding
-     *
-     * @throws FileNotFoundException
-     * @return string
-     */
-    public function toText($inputfile, $toEncoding = 'UTF-8')
+    public function toText(string $inputFile, string $toEncoding = 'UTF-8'): string
     {
-        if (!file_exists($inputfile)) {
-            throw new FileNotFoundException("File $inputfile not found.");
+        if (!file_exists($inputFile)) {
+            throw new FileNotFoundException("File $inputFile not found.");
         }
 
-        $output = $this->pdftotext->command(array('-nopgbrk', $inputfile, '-'));
+        $output = $this->pdftotext->command(array('-nopgbrk', $inputFile, '-'));
         $fromEncoding = mb_detect_encoding($output);
         if ($fromEncoding) {
             return mb_convert_encoding($output, $toEncoding, $fromEncoding);
@@ -72,40 +51,30 @@ class PdfFile
         return mb_convert_encoding($output, $toEncoding);
     }
 
-    /**
-     * @param string $inputfile
-     * @param string $outputfile
-     *
-     * @throws FileNotFoundException
-     * @return string
-     */
-    public function toHtml($inputfile, $outputfile)
+    public function toHtml(string $inputFile, string $outputFile): string
     {
-        if (!file_exists($inputfile)) {
-            throw new FileNotFoundException("File $inputfile not found.");
+        if (!file_exists($inputFile)) {
+            throw new FileNotFoundException("File $inputFile not found.");
         }
 
-        $output = $this->pdftohtml->command(array($inputfile, $outputfile));
+        $output = $this->pdftohtml->command(array($inputFile, $outputFile));
 
         return $output;
     }
 
-    /**
-     * Write to file or return content
-     *
-     * @param string $inputfile
-     *
-     * @return array
-     */
-    public function getInfo($inputfile)
+    public function getInfo(string $inputFile): ?array
     {
-        if (!file_exists($inputfile)) {
-            throw new FileNotFoundException("File $inputfile not found.");
+        if (!file_exists($inputFile)) {
+            throw new FileNotFoundException("File $inputFile not found.");
         }
 
-        $args = array($inputfile);
+        $args = array($inputFile);
 
         $output = $this->pdfinfo->command($args);
+
+        if (!$output) {
+            return null;
+        }
 
         $info = array();
         foreach (explode(PHP_EOL, $output) as $line) {

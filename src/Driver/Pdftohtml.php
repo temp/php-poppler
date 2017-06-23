@@ -1,5 +1,7 @@
 <?php
 
+declare (strict_types = 1);
+
 /*
  * This file is part of php-poppler.
  *
@@ -19,29 +21,21 @@ use Poppler\Exception\ExecutableNotFoundException;
 use Psr\Log\LoggerInterface;
 
 /**
- * pdftohtml binary driver
- *
- * @author Stephan Wentz <stephan@wentz.it>
+ * pdftohtml binary driver.
  */
 class Pdftohtml extends AbstractBinary
 {
     /**
-     * @var boolean
+     * @var bool
      */
     private $isAvailable;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'pdftohtml';
     }
 
-    /**
-     * @return PdftohtmlOptions
-     */
-    public function options()
+    public function options(): PdftohtmlOptions
     {
         return new PdftohtmlOptions();
     }
@@ -49,12 +43,12 @@ class Pdftohtml extends AbstractBinary
     /**
      * Creates an Pdftohtml driver.
      *
-     * @param LoggerInterface     $logger
-     * @param array|Configuration $configuration
+     * @param LoggerInterface       $logger
+     * @param mixed]||Configuration $configuration
      *
      * @return Pdftohtml
      */
-    public static function create(LoggerInterface $logger = null, $configuration = array())
+    public static function create(LoggerInterface $logger = null, $configuration = array()): Pdftohtml
     {
         if (!$configuration instanceof ConfigurationInterface) {
             $configuration = new Configuration($configuration);
@@ -74,13 +68,9 @@ class Pdftohtml extends AbstractBinary
     }
 
     /**
-     * Check availability
-     *
-     * @param string $filename
-     *
-     * @return boolean
+     * Check availability.
      */
-    public function isAvailable($filename = null)
+    public function isAvailable(): bool
     {
         if (null === $this->isAvailable) {
             $output = $this->command('-v');

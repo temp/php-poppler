@@ -1,5 +1,7 @@
 <?php
 
+declare (strict_types = 1);
+
 /*
  * This file is part of php-poppler.
  *
@@ -12,9 +14,7 @@
 namespace Poppler\Driver;
 
 /**
- * pdftotext options
- *
- * @author Stephan Wentz <stephan@wentz.it>
+ * pdftotext options.
  */
 class PdftotextOptions
 {
@@ -23,13 +23,7 @@ class PdftotextOptions
      */
     private $options = array();
 
-    /**
-     * @param string $key
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setOption($key, $value = null)
+    public function setOption(string $key, ?string $value = null): self
     {
         $this->options[$key] = $value;
 
@@ -37,9 +31,9 @@ class PdftotextOptions
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return $this->options;
     }
@@ -47,101 +41,71 @@ class PdftotextOptions
     /**
      * Set -f
      * first page to convert
-     *
-     * @param string $page
-     *
-     * @return $this
      */
-    public function first($page)
+    public function first(int $page): self
     {
-        return $this->setOption('-f', (integer) $page);
+        return $this->setOption('-f', (string) $page);
     }
 
     /**
      * Set -l
      * last page to convert
-     *
-     * @param integer $page
-     *
-     * @return $this
      */
-    public function last($page)
+    public function last(int $page): self
     {
-        return $this->setOption('-l', (integer) $page);
+        return $this->setOption('-l', (string) $page);
     }
 
     /**
      * Set -r <resolution>
      * resolution, in DPI (default is 72)
-     *
-     * @param integer $resolution
-     *
-     * @return $this
      */
-    public function resolution($resolution)
+    public function resolution(int $resolution): self
     {
-        return $this->setOption('-r', (integer) $resolution);
+        return $this->setOption('-r', (string) $resolution);
     }
 
     /**
      * Set -x
      * x-coordinate of the crop area top left corner
-     *
-     * @param integer $xCoordinate
-     *
-     * @return $this
      */
-    public function xCoordinate($xCoordinate)
+    public function xCoordinate(int $xCoordinate): self
     {
-        return $this->setOption('-x', (integer) $xCoordinate);
+        return $this->setOption('-x', (string) $xCoordinate);
     }
 
     /**
      * Set -y
      * y-coordinate of the crop area top left corner
-     *
-     * @param integer $yCoordinate
-     *
-     * @return $this
      */
-    public function yCoordinate($yCoordinate)
+    public function yCoordinate(int $yCoordinate): self
     {
-        return $this->setOption('-y', (integer) $yCoordinate);
+        return $this->setOption('-y', (string) $yCoordinate);
     }
 
     /**
      * Set -W
      * width of crop area in pixels (default is 0)
-     *
-     * @param integer $width
-     *
-     * @return $this
      */
-    public function width($width)
+    public function width(int $width): self
     {
-        return $this->setOption('-W', (integer) $width);
+        return $this->setOption('-W', (string) $width);
     }
 
     /**
      * Set -H
      * hidth of crop area in pixels (default is 0)
-     *
-     * @param integer $height
-     *
-     * @return $this
      */
-    public function height($height)
+    public function height(int $height): self
     {
-        return $this->setOption('-H', (integer) $height);
+        return $this->setOption('-H', (string) $height);
     }
 
     /**
      * Set -layout
      * maintain original physical layout
-     *
-     * @return $this
      */
-    public function layout()
+    public function layout(): self
     {
         return $this->setOption('layout');
     }
@@ -149,12 +113,8 @@ class PdftotextOptions
     /**
      * Set -fixed
      * assume fixed-pitch (or tabular) text
-     *
-     * @param string $fp
-     *
-     * @return $this
      */
-    public function fixed($fp)
+    public function fixed(string $fp): self
     {
         return $this->setOption('-fixed', $fp);
     }
@@ -162,10 +122,8 @@ class PdftotextOptions
     /**
      * Set -raw
      * keep strings in content stream order
-     *
-     * @return $this
      */
-    public function raw()
+    public function raw(): self
     {
         return $this->setOption('-raw');
     }
@@ -173,10 +131,8 @@ class PdftotextOptions
     /**
      * Set -htmlmeta
      * generate a simple HTML file, including the meta information
-     *
-     * @return $this
      */
-    public function htmlMeta()
+    public function htmlMeta(): self
     {
         return $this->setOption('-htmlmeta');
     }
@@ -184,12 +140,8 @@ class PdftotextOptions
     /**
      * Set --enc <value>
      * output text encoding name
-     *
-     * @param string $value
-     *
-     * @return $this
      */
-    public function encoding($value)
+    public function encoding(string $value): self
     {
         return $this->setOption('-enc', $value);
     }
@@ -197,13 +149,8 @@ class PdftotextOptions
     /**
      * Set -eol
      * output end-of-line convention (unix, dos, or mac)
-     *
-     * @param string $eol
-     *
-     * @throws \InvalidArgumentException
-     * @return $this
      */
-    public function eol($eol)
+    public function eol(string $eol): self
     {
         if (!in_array($eol, array('unix', 'dos', 'mac'))) {
             throw new \InvalidArgumentException('eol has to be one of unix, dos or mac.');
@@ -215,10 +162,8 @@ class PdftotextOptions
     /**
      * Set -nopgbrk
      * don't insert page breaks between pages
-     *
-     * @return $this
      */
-    public function noPageBreak()
+    public function noPageBreak(): self
     {
         return $this->setOption('-nopgbrk');
     }
@@ -226,10 +171,8 @@ class PdftotextOptions
     /**
      * Set -bbox
      * output bounding box for each word and page size to html.  Sets -htmlmeta
-     *
-     * @return $this
      */
-    public function boundingBox()
+    public function boundingBox(): self
     {
         return $this->setOption('-bbox');
     }
@@ -237,12 +180,8 @@ class PdftotextOptions
     /**
      * Set -opw
      * owner password (for encrypted files)
-     *
-     * @param string $ownerPassword
-     *
-     * @return $this
      */
-    public function ownerPassword($ownerPassword)
+    public function ownerPassword(string $ownerPassword): self
     {
         return $this->setOption('-opw', $ownerPassword);
     }
@@ -250,12 +189,8 @@ class PdftotextOptions
     /**
      * Set -upw
      * user password (for encrypted files)
-     *
-     * @param boolean $userPassword
-     *
-     * @return $this
      */
-    public function userPassword($userPassword)
+    public function userPassword(string $userPassword): self
     {
         return $this->setOption('upw', $userPassword);
     }
@@ -263,10 +198,8 @@ class PdftotextOptions
     /**
      * Set -q
      * don't print any messages or errors
-     *
-     * @return $this
      */
-    public function quiet()
+    public function quiet(): self
     {
         return $this->setOption('quiet');
     }

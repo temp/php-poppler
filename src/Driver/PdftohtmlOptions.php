@@ -1,5 +1,7 @@
 <?php
 
+declare (strict_types = 1);
+
 /*
  * This file is part of php-poppler.
  *
@@ -12,24 +14,13 @@
 namespace Poppler\Driver;
 
 /**
- * pdftohtml options
- *
- * @author Stephan Wentz <stephan@wentz.it>
+ * pdftohtml options.
  */
 class PdftohtmlOptions
 {
-    /**
-     * @var array
-     */
     private $options = array();
 
-    /**
-     * @param string $key
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setOption($key, $value = null)
+    public function setOption(string $key, ?string $value = null): self
     {
         $this->options[$key] = $value;
 
@@ -37,7 +28,7 @@ class PdftohtmlOptions
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function getOptions()
     {
@@ -47,38 +38,26 @@ class PdftohtmlOptions
     /**
      * Set -f
      * first page to convert
-     *
-     * @param string $page
-     *
-     * @return $this
      */
-    public function first($page)
+    public function first(int $page): self
     {
-        return $this->setOption('-f', (integer) $page);
+        return $this->setOption('-f', (string) $page);
     }
 
     /**
      * Set -l
      * last page to convert
-     *
-     * @param integer $page
-     *
-     * @return $this
      */
-    public function last($page)
+    public function last(int $page): self
     {
-        return $this->setOption('-l', (integer) $page);
+        return $this->setOption('-l', (string) $page);
     }
 
     /**
      * Set -opw
      * owner password (for encrypted files)
-     *
-     * @param string $ownerPassword
-     *
-     * @return $this
      */
-    public function ownerPassword($ownerPassword)
+    public function ownerPassword(string $ownerPassword): self
     {
         return $this->setOption('-opw', $ownerPassword);
     }
@@ -86,12 +65,8 @@ class PdftohtmlOptions
     /**
      * Set -upw
      * user password (for encrypted files)
-     *
-     * @param boolean $userPassword
-     *
-     * @return $this
      */
-    public function userPassword($userPassword)
+    public function userPassword(string $userPassword): self
     {
         return $this->setOption('upw', $userPassword);
     }
@@ -99,10 +74,8 @@ class PdftohtmlOptions
     /**
      * Set -q
      * don't print any messages or errors
-     *
-     * @return $this
      */
-    public function quiet()
+    public function quiet(): self
     {
         return $this->setOption('quiet');
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare (strict_types = 1);
+
 /*
  * This file is part of php-poppler.
  *
@@ -19,21 +21,16 @@ use Poppler\Exception\ExecutableNotFoundException;
 use Psr\Log\LoggerInterface;
 
 /**
- * pdfinfo binary driver
- *
- * @author Stephan Wentz <stephan@wentz.it>
+ * pdfinfo binary driver.
  */
 class Pdfinfo extends AbstractBinary
 {
     /**
-     * @var boolean
+     * @var bool
      */
     private $isAvailable;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'pdfinfo';
     }
@@ -41,12 +38,12 @@ class Pdfinfo extends AbstractBinary
     /**
      * Creates an Pdfinfo driver.
      *
-     * @param LoggerInterface     $logger
-     * @param array|Configuration $configuration
+     * @param LoggerInterface       $logger
+     * @param mixed[]|Configuration $configuration
      *
      * @return Pdfinfo
      */
-    public static function create(LoggerInterface $logger = null, $configuration = array())
+    public static function create(LoggerInterface $logger = null, $configuration = array()): Pdfinfo
     {
         if (!$configuration instanceof ConfigurationInterface) {
             $configuration = new Configuration($configuration);
@@ -65,14 +62,7 @@ class Pdfinfo extends AbstractBinary
         }
     }
 
-    /**
-     * Check availability
-     *
-     * @param string $filename
-     *
-     * @return boolean
-     */
-    public function isAvailable($filename = null)
+    public function isAvailable(): bool
     {
         if (null === $this->isAvailable) {
             $output = $this->command('-v');

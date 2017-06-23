@@ -1,8 +1,10 @@
 <?php
+
 namespace Poppler\Tests\Driver;
 
 use Alchemy\BinaryDriver\Configuration;
 use Poppler\Driver\Pdftotext;
+use Poppler\Exception\ExecutableNotFoundException;
 use Poppler\Tests\TestCase;
 use Symfony\Component\Process\ExecutableFinder;
 
@@ -25,24 +27,27 @@ class PdftotextTest extends TestCase
 
     public function testCreate()
     {
-        $logger = $this->createLoggerMock();
-        $pdftotext = Pdftotext::create($logger, array());
-        $this->assertInstanceOf('Poppler\Driver\Pdftotext', $pdftotext);
-        $this->assertEquals($logger, $pdftotext->getProcessRunner()->getLogger());
+        $logger = $this->createLogger();
+
+        $pdftotext = Pdftotext::create($logger->reveal(), array());
+
+        $this->assertInstanceOf(Pdftotext::class, $pdftotext);
+        $this->assertEquals($logger->reveal(), $pdftotext->getProcessRunner()->getLogger());
     }
 
     public function testCreateWithConfig()
     {
         $conf = new Configuration();
-        $pdftotext = Pdftotext::create($this->createLoggerMock(), $conf);
+
+        $pdftotext = Pdftotext::create($this->createLogger()->reveal(), $conf);
+
         $this->assertEquals($conf, $pdftotext->getConfiguration());
     }
 
-    /**
-     * @expectedException \Poppler\Exception\ExecutableNotFoundException
-     */
     public function testCreateFailureThrowsAnException()
     {
-        Pdftotext::create($this->createLoggerMock(), array('pdftotext.binaries' => '/path/to/nowhere'));
+        $this->expectException(ExecutableNotFoundException::class);
+
+        Pdftotext::create($this->createLogger()->reveal(), array('pdftotext.binaries' => '/path/to/nowhere'));
     }
 }
