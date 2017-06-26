@@ -84,6 +84,10 @@ class PdfFile
             $parts = explode(': ', $line);
             $key = trim($parts[0]);
             $value = trim($parts[1]);
+            if (preg_match('/^\w{3} \w{3} \d\d \d\d:\d\d:\d\d \d\d\d\d/', $value, $match)) {
+                $date = new \DateTimeImmutable($value);
+                $value = $date->format('c');
+            }
             $info[$key] = $value;
         }
 

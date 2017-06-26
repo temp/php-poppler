@@ -23,7 +23,7 @@ class PdfFileFunctionalTest extends TestCase
         $this->assertSame('This is a test PDF file', $info['Title']);
         $this->assertSame('1', $info['Pages']);
         $this->assertSame('1.3', $info['PDF version']);
-        $this->assertStringStartsWith('Thu Jun 29 01:21:08 2000', $info['CreationDate']);
+        $this->assertSame('2000-06-29T01:21:08+02:00', $info['CreationDate']);
     }
 
     public function testToText()
