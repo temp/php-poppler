@@ -1,14 +1,19 @@
 language: php
 
+matrix:
+  include:
+    - php: 7.0
+    - php: 7.1
+    - php: nightly
+  allow_failures:
+    - php: nightly
+  fast_finish: true
+
 before_script:
   - sudo apt-get update
   - sudo apt-get install -y poppler-utils
   - composer self-update
-  - composer install --no-interaction --prefer-source --dev
-
-php:
-  - 7.0
-  - 7.1
+  - composer update --no-interaction --prefer-dist
 
 script:
   - vendor/bin/phpunit --verbose --coverage-clover=coverage.clover
