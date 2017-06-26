@@ -18,7 +18,7 @@ namespace Poppler\Driver;
  */
 class PdftohtmlOptions
 {
-    private $options = array();
+    private $options = [];
 
     public function setOption(string $key, ?string $value = null): self
     {

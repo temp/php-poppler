@@ -48,7 +48,7 @@ class Pdftotext extends AbstractBinary
      *
      * @return Pdftotext
      */
-    public static function create(LoggerInterface $logger = null, $configuration = array()): Pdftotext
+    public static function create(LoggerInterface $logger = null, $configuration = []): Pdftotext
     {
         if (!$configuration instanceof ConfigurationInterface) {
             $configuration = new Configuration($configuration);

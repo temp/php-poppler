@@ -42,7 +42,7 @@ class PdfFile
             throw new FileNotFoundException("File $inputFile not found.");
         }
 
-        $output = $this->pdftotext->command(array('-nopgbrk', $inputFile, '-'));
+        $output = $this->pdftotext->command(['-nopgbrk', $inputFile, '-']);
         $fromEncoding = mb_detect_encoding($output);
         if ($fromEncoding) {
             return mb_convert_encoding($output, $toEncoding, $fromEncoding);
@@ -57,26 +57,26 @@ class PdfFile
             throw new FileNotFoundException("File $inputFile not found.");
         }
 
-        $output = $this->pdftohtml->command(array($inputFile, $outputFile));
+        $output = $this->pdftohtml->command([$inputFile, $outputFile]);
 
         return $output;
     }
 
-    public function getInfo(string $inputFile): ?array
+    public function getInfo(string $inputFile): array
     {
         if (!file_exists($inputFile)) {
             throw new FileNotFoundException("File $inputFile not found.");
         }
 
-        $args = array($inputFile);
+        $args = [$inputFile];
 
         $output = $this->pdfinfo->command($args);
 
         if (!$output) {
-            return null;
+            return [];
         }
 
-        $info = array();
+        $info = [];
         foreach (explode(PHP_EOL, $output) as $line) {
             if (strpos($line, ': ') === false) {
                 continue;

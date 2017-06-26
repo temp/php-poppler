@@ -43,7 +43,7 @@ class Pdfinfo extends AbstractBinary
      *
      * @return Pdfinfo
      */
-    public static function create(LoggerInterface $logger = null, $configuration = array()): Pdfinfo
+    public static function create(LoggerInterface $logger = null, $configuration = []): Pdfinfo
     {
         if (!$configuration instanceof ConfigurationInterface) {
             $configuration = new Configuration($configuration);

@@ -21,7 +21,7 @@ class PdftotextOptions
     /**
      * @var array
      */
-    private $options = array();
+    private $options = [];
 
     public function setOption(string $key, ?string $value = null): self
     {
@@ -152,7 +152,7 @@ class PdftotextOptions
      */
     public function eol(string $eol): self
     {
-        if (!in_array($eol, array('unix', 'dos', 'mac'))) {
+        if (!in_array($eol, ['unix', 'dos', 'mac'])) {
             throw new \InvalidArgumentException('eol has to be one of unix, dos or mac.');
         }
 
