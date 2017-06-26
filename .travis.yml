@@ -14,6 +14,7 @@ before_script:
   - sudo apt-get install -y poppler-utils
   - composer self-update
   - composer update --no-interaction --prefer-dist
+  - pdfinfo -v
 
 script:
   - vendor/bin/phpunit --verbose --coverage-clover=coverage.clover
