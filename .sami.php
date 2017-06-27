@@ -14,7 +14,7 @@ $iterator = Finder::create()
 ;
 
 return new Sami($iterator, array(
-    'title'                => 'PHP-FFMpeg API',
+    'title'                => 'php-poppler API',
     'theme'                => 'enhanced',
     'build_dir'            => __DIR__.'/docs/api',
     'cache_dir'            => __DIR__.'/docs/api/cache',
