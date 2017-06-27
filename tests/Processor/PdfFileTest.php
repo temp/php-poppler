@@ -5,7 +5,6 @@ namespace Poppler\Tests\Processor;
 use Poppler\Exception\FileNotFoundException;
 use Poppler\Processor\PdfFile;
 use Poppler\Tests\TestCase;
-use Prophecy\Argument;
 
 class PdfFileTest extends TestCase
 {
@@ -25,7 +24,7 @@ class PdfFileTest extends TestCase
         $pdfInfo->command([self::TESTFILE])
             ->willReturn('testInfo: testInfo');
 
-        $pdfToText->command(["-nopgbrk", self::TESTFILE, '-'])
+        $pdfToText->command(['-nopgbrk', self::TESTFILE, '-'])
             ->willReturn('testText');
 
         $pdfToHtml->command([self::TESTFILE, $this->tempDir])

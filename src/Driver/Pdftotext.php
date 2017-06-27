@@ -87,7 +87,7 @@ class Pdftotext extends AbstractBinary
             } else {
                 $this->isAvailable = false;
 
-                $this->getProcessRunner()->getLogger()->warning("pdftotext is not available");
+                $this->getProcessRunner()->getLogger()->warning('pdftotext is not available');
             }
         }
 
@@ -96,7 +96,7 @@ class Pdftotext extends AbstractBinary
 
     /**
      * Calls -listenc
-     * list available encodings
+     * list available encodings.
      */
     public function listEncodings(): string
     {

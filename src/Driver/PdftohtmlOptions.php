@@ -37,7 +37,7 @@ class PdftohtmlOptions
 
     /**
      * Set -f
-     * first page to convert
+     * first page to convert.
      */
     public function first(int $page): self
     {
@@ -46,7 +46,7 @@ class PdftohtmlOptions
 
     /**
      * Set -l
-     * last page to convert
+     * last page to convert.
      */
     public function last(int $page): self
     {
@@ -55,7 +55,7 @@ class PdftohtmlOptions
 
     /**
      * Set -opw
-     * owner password (for encrypted files)
+     * owner password (for encrypted files).
      */
     public function ownerPassword(string $ownerPassword): self
     {
@@ -64,7 +64,7 @@ class PdftohtmlOptions
 
     /**
      * Set -upw
-     * user password (for encrypted files)
+     * user password (for encrypted files).
      */
     public function userPassword(string $userPassword): self
     {
@@ -73,7 +73,7 @@ class PdftohtmlOptions
 
     /**
      * Set -q
-     * don't print any messages or errors
+     * don't print any messages or errors.
      */
     public function quiet(): self
     {

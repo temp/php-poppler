@@ -40,7 +40,7 @@ class PdftotextOptions
 
     /**
      * Set -f
-     * first page to convert
+     * first page to convert.
      */
     public function first(int $page): self
     {
@@ -49,7 +49,7 @@ class PdftotextOptions
 
     /**
      * Set -l
-     * last page to convert
+     * last page to convert.
      */
     public function last(int $page): self
     {
@@ -58,7 +58,7 @@ class PdftotextOptions
 
     /**
      * Set -r <resolution>
-     * resolution, in DPI (default is 72)
+     * resolution, in DPI (default is 72).
      */
     public function resolution(int $resolution): self
     {
@@ -67,7 +67,7 @@ class PdftotextOptions
 
     /**
      * Set -x
-     * x-coordinate of the crop area top left corner
+     * x-coordinate of the crop area top left corner.
      */
     public function xCoordinate(int $xCoordinate): self
     {
@@ -76,7 +76,7 @@ class PdftotextOptions
 
     /**
      * Set -y
-     * y-coordinate of the crop area top left corner
+     * y-coordinate of the crop area top left corner.
      */
     public function yCoordinate(int $yCoordinate): self
     {
@@ -85,7 +85,7 @@ class PdftotextOptions
 
     /**
      * Set -W
-     * width of crop area in pixels (default is 0)
+     * width of crop area in pixels (default is 0).
      */
     public function width(int $width): self
     {
@@ -94,7 +94,7 @@ class PdftotextOptions
 
     /**
      * Set -H
-     * hidth of crop area in pixels (default is 0)
+     * hidth of crop area in pixels (default is 0).
      */
     public function height(int $height): self
     {
@@ -103,7 +103,7 @@ class PdftotextOptions
 
     /**
      * Set -layout
-     * maintain original physical layout
+     * maintain original physical layout.
      */
     public function layout(): self
     {
@@ -112,7 +112,7 @@ class PdftotextOptions
 
     /**
      * Set -fixed
-     * assume fixed-pitch (or tabular) text
+     * assume fixed-pitch (or tabular) text.
      */
     public function fixed(string $fp): self
     {
@@ -121,7 +121,7 @@ class PdftotextOptions
 
     /**
      * Set -raw
-     * keep strings in content stream order
+     * keep strings in content stream order.
      */
     public function raw(): self
     {
@@ -130,7 +130,7 @@ class PdftotextOptions
 
     /**
      * Set -htmlmeta
-     * generate a simple HTML file, including the meta information
+     * generate a simple HTML file, including the meta information.
      */
     public function htmlMeta(): self
     {
@@ -139,7 +139,7 @@ class PdftotextOptions
 
     /**
      * Set --enc <value>
-     * output text encoding name
+     * output text encoding name.
      */
     public function encoding(string $value): self
     {
@@ -148,7 +148,7 @@ class PdftotextOptions
 
     /**
      * Set -eol
-     * output end-of-line convention (unix, dos, or mac)
+     * output end-of-line convention (unix, dos, or mac).
      */
     public function eol(string $eol): self
     {
@@ -161,7 +161,7 @@ class PdftotextOptions
 
     /**
      * Set -nopgbrk
-     * don't insert page breaks between pages
+     * don't insert page breaks between pages.
      */
     public function noPageBreak(): self
     {
@@ -170,7 +170,7 @@ class PdftotextOptions
 
     /**
      * Set -bbox
-     * output bounding box for each word and page size to html.  Sets -htmlmeta
+     * output bounding box for each word and page size to html. Sets -htmlmeta.
      */
     public function boundingBox(): self
     {
@@ -179,7 +179,7 @@ class PdftotextOptions
 
     /**
      * Set -opw
-     * owner password (for encrypted files)
+     * owner password (for encrypted files).
      */
     public function ownerPassword(string $ownerPassword): self
     {
@@ -188,7 +188,7 @@ class PdftotextOptions
 
     /**
      * Set -upw
-     * user password (for encrypted files)
+     * user password (for encrypted files).
      */
     public function userPassword(string $userPassword): self
     {
@@ -197,7 +197,7 @@ class PdftotextOptions
 
     /**
      * Set -q
-     * don't print any messages or errors
+     * don't print any messages or errors.
      */
     public function quiet(): self
     {

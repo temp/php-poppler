@@ -79,7 +79,7 @@ class Pdfinfo extends AbstractBinary
             } else {
                 $this->isAvailable = false;
 
-                $this->getProcessRunner()->getLogger()->warning("pdfinfo is not available");
+                $this->getProcessRunner()->getLogger()->warning('pdfinfo is not available');
             }
         }
 
