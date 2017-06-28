@@ -5,4 +5,11 @@ linting: true
 enabled:
     - ordered_use
     - strict
+    - declare_strict_types
 
+disabled:
+    - declare_equal_normalize
+
+finder:
+    exclude:
+        - "Tests"
