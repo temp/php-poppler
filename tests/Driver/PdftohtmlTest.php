@@ -14,7 +14,7 @@ class PdftohtmlTest extends TestCase
     {
         $executableFinder = new ExecutableFinder();
         $found = false;
-        foreach (array('pdftohtml') as $name) {
+        foreach (['pdftohtml'] as $name) {
             if (null !== $executableFinder->find($name)) {
                 $found = true;
                 break;
@@ -29,7 +29,7 @@ class PdftohtmlTest extends TestCase
     {
         $logger = $this->createLogger();
 
-        $pdftohtml = Pdftohtml::create($logger->reveal(), array());
+        $pdftohtml = Pdftohtml::create($logger->reveal(), []);
 
         $this->assertInstanceOf(Pdftohtml::class, $pdftohtml);
         $this->assertEquals($logger->reveal(), $pdftohtml->getProcessRunner()->getLogger());
@@ -48,6 +48,6 @@ class PdftohtmlTest extends TestCase
     {
         $this->expectException(ExecutableNotFoundException::class);
 
-        Pdftohtml::create($this->createLogger()->reveal(), array('pdftohtml.binaries' => '/path/to/nowhere'));
+        Pdftohtml::create($this->createLogger()->reveal(), ['pdftohtml.binaries' => '/path/to/nowhere']);
     }
 }

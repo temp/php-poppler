@@ -14,7 +14,7 @@ class PdfinfoTest extends TestCase
     {
         $executableFinder = new ExecutableFinder();
         $found = false;
-        foreach (array('pdfinfo') as $name) {
+        foreach (['pdfinfo'] as $name) {
             if (null !== $executableFinder->find($name)) {
                 $found = true;
                 break;
@@ -29,7 +29,7 @@ class PdfinfoTest extends TestCase
     {
         $logger = $this->createLogger();
 
-        $pdfinfo = Pdfinfo::create($logger->reveal(), array());
+        $pdfinfo = Pdfinfo::create($logger->reveal(), []);
 
         $this->assertInstanceOf(Pdfinfo::class, $pdfinfo);
         $this->assertEquals($logger->reveal(), $pdfinfo->getProcessRunner()->getLogger());
@@ -48,6 +48,6 @@ class PdfinfoTest extends TestCase
     {
         $this->expectException(ExecutableNotFoundException::class);
 
-        Pdfinfo::create($this->createLogger()->reveal(), array('pdfinfo.binaries' => '/path/to/nowhere'));
+        Pdfinfo::create($this->createLogger()->reveal(), ['pdfinfo.binaries' => '/path/to/nowhere']);
     }
 }

@@ -14,7 +14,7 @@ class PdftotextTest extends TestCase
     {
         $executableFinder = new ExecutableFinder();
         $found = false;
-        foreach (array('pdftotext') as $name) {
+        foreach (['pdftotext'] as $name) {
             if (null !== $executableFinder->find($name)) {
                 $found = true;
                 break;
@@ -29,7 +29,7 @@ class PdftotextTest extends TestCase
     {
         $logger = $this->createLogger();
 
-        $pdftotext = Pdftotext::create($logger->reveal(), array());
+        $pdftotext = Pdftotext::create($logger->reveal(), []);
 
         $this->assertInstanceOf(Pdftotext::class, $pdftotext);
         $this->assertEquals($logger->reveal(), $pdftotext->getProcessRunner()->getLogger());
@@ -48,6 +48,6 @@ class PdftotextTest extends TestCase
     {
         $this->expectException(ExecutableNotFoundException::class);
 
-        Pdftotext::create($this->createLogger()->reveal(), array('pdftotext.binaries' => '/path/to/nowhere'));
+        Pdftotext::create($this->createLogger()->reveal(), ['pdftotext.binaries' => '/path/to/nowhere']);
     }
 }
